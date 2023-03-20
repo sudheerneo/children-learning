@@ -1,4 +1,4 @@
-#main {
+.numberGame {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -8,13 +8,16 @@
     left: 0;
     right: 0;
     position: absolute;
-}
-child {
-    text-align: center;
-}
-h1 {
-    font-size: 200px;
+    font-size: 150px;
+    text-shadow: 7px 4px black;
 }
 #display {
-    text-shadow: 7px 4px black;
+    text-shadow: 1px 1px transparent;
+}
+.numbrsList {
+    font-size: 260%;
+    width: 6%;
+    text-align: center;
+    box-shadow: 1px 1px lightslategray;
+    align-items: center;
 }
