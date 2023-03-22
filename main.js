@@ -21,7 +21,6 @@ const checkCompatibility = () => {
             </div>`
           ),
           $(".navbar").hide());
-    console.log(contextData.letters);
 };
 
 class Command {
