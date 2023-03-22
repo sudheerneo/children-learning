@@ -1,21 +1,11 @@
 $(document).ready(() => {
     window.localStorage.setItem("activeState", "incative"); //reset state
     $(document).keyup((e) => {
-        const pressedKey = e.key.lowercase();
+        const pressedKey = e.key.toLowerCase();
         const command = contextData.keyCommands[pressedKey];
         command
             ? new Command(command)
             : (console.log("key not assigned "), new Command().changeColors());
-
-        // pressedKey === "r" || pressedKey === "h"
-        //     ? new Command("reset")
-        //     : pressedKey === " " || pressedKey === "Enter"
-        //     ? new Command("exec")
-        //     : pressedKey === "n"
-        //     ? new Command("numbers")
-        //     : pressedKey === "a"
-        //     ? new Command("abcs")
-        //     : (console.log("key not assigned"), new Command().changeColors());
     });
     new Command().changeColors();
     checkCompatibility();
