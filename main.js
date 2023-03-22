@@ -7,7 +7,17 @@ $(document).ready(() => {
         (e.key === " " || e.key === "Enter") && new Command("exec");
     });
     new Command().changeColors();
+    checkCompatibility();
 });
+
+const checkCompatibility = () => {
+    window.innerHeight < window.innerWidth
+        ? false
+        : ($("#display").html(
+              `<div class="d-flex justify-content-center align-items-center vh-100 flex-column text-center container"><h1>Device not supported</h1><p>Use landscape mode in bigscreens and only try with keyboard events. Touch events not supported.</p></div>`
+          ),
+          $(".navbar").hide());
+};
 
 class Command {
     constructor(req) {
@@ -55,7 +65,7 @@ class Command {
         window.localStorage.setItem("activeState", "numBlock");
         $("#display").html(`
            <div class="d-flex flex-wrap align-items-center justify-content-center">
-                <div class="d-flex flex-wrap" id="num">
+                <div class="d-flex flex-wrap justify-content-center" id="num">
                     ${(() => {
                         let html = "";
                         for (let i = 1; i <= 105; i++) {
@@ -71,7 +81,7 @@ class Command {
     abcs = () => {
         window.localStorage.setItem("activeState", "abcBlock");
         $("#display").html(`
-           <div class="  d-flex flex-wrap align-items-center justify-content-center">
+           <div class="  d-flex flex-wrap justify-content-center">
                 <div class="d-flex flex-wrap" id="num">
                     ${(() => {
                         let html = "";
