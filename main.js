@@ -1,10 +1,21 @@
 $(document).ready(() => {
+    window.localStorage.setItem("activeState", "incative"); //reset state
     $(document).keyup((e) => {
-        (e.key === "r" || e.key === "R" || e.key === "h" || e.key === "H") &&
-            new Command("reset");
-        (e.key === "n" || e.key === "N") && new Command("numbers");
-        (e.key === "a" || e.key === "A") && new Command("abcs");
-        (e.key === " " || e.key === "Enter") && new Command("exec");
+        const pressedKey = e.key.lowercase();
+        const command = contextData.keyCommands[pressedKey];
+        command
+            ? new Command(command)
+            : (console.log("key not assigned "), new Command().changeColors());
+
+        // pressedKey === "r" || pressedKey === "h"
+        //     ? new Command("reset")
+        //     : pressedKey === " " || pressedKey === "Enter"
+        //     ? new Command("exec")
+        //     : pressedKey === "n"
+        //     ? new Command("numbers")
+        //     : pressedKey === "a"
+        //     ? new Command("abcs")
+        //     : (console.log("key not assigned"), new Command().changeColors());
     });
     new Command().changeColors();
     checkCompatibility();
@@ -14,14 +25,17 @@ const checkCompatibility = () => {
     window.innerHeight < window.innerWidth
         ? false
         : ($("#display").html(
-              `<div class="d-flex justify-content-center align-items-center vh-100 flex-column text-center container"><h1>Device not supported</h1><p>Use landscape mode in bigscreens and only try with keyboard events. Touch events not supported.</p></div>`
+              `<div class="d-flex justify-content-center align-items-center vh-100 flex-column text-center container">
+                <h1>Device not supported</h1>
+                <p>Use landscape mode in bigscreens and only try with keyboard events. Touch events not supported.</p>
+            </div>`
           ),
           $(".navbar").hide());
+    console.log(contextData.letters);
 };
 
 class Command {
     constructor(req) {
-        const activ = "";
         const activeState = window.localStorage.getItem("activeState");
         req && this.changeColors();
         req === "numbers" && this.numbers();
@@ -45,7 +59,7 @@ class Command {
                         ${this.randomNmmbr(256, 1)},
                         ${this.randomNmmbr(256, 1)},
                         ${this.randomNmmbr(256, 1)}
-                    )`; // ex rgb(222, 154, 57);
+                    )`; // ex: rgb(222, 154, 57);
     };
     guesNumbrsGame = () => {
         $("#display").html(`
@@ -97,37 +111,10 @@ class Command {
         `);
     };
     changeAbcs = () => {
-        const bigCase = [
-            "APPLE",
-            "BALL",
-            "CAT",
-            "DOG",
-            "ELEPHANT",
-            "FISH",
-            "GOAT",
-            "HOUSE",
-            "INDIA",
-            "JAGUAR",
-            "KITE",
-            "LION",
-            "MANGO",
-            "NEST",
-            "OWL",
-            "PARROT",
-            "QUEEN",
-            "RABBIT",
-            "SUN",
-            "TRAIN",
-            "UMBRELLA",
-            "VAN",
-            "WATCH",
-            "XYLOPHONE",
-            "YAK",
-            "ZEBRA",
-        ];
+        const words = contextData.words;
         $("#display").html(`
             <div class="contaniner numberGame">
-                ${bigCase[this.randomNmmbr(25, 0)]}
+                ${words[this.randomNmmbr(25, 0)]}
             </div>
         `);
     };
