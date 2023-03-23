@@ -1,13 +1,11 @@
 $(document).ready(() => {
     window.localStorage.setItem("activeState", "incative"); //reset state
     $(document).keyup((e) => {
+        new Command().changeColors(); //change colors when press any key
         const pressedKey = e.key.toLowerCase();
         const command = contextData.keyCommands[pressedKey];
-        command
-            ? new Command(command)
-            : (console.log("key not assigned "), new Command().changeColors());
+        command ? new Command(command) : console.log("key not assigned ");
     });
-    new Command().changeColors();
     checkCompatibility();
 });
 
@@ -26,9 +24,10 @@ const checkCompatibility = () => {
 class Command {
     constructor(req) {
         const activeState = window.localStorage.getItem("activeState");
-        req && this.changeColors();
+
         req === "numbers" && this.numbers();
         req === "abcs" && this.abcs();
+        req === "help" && this.navbarToggle();
         req === "reset" &&
             (window.localStorage.setItem("activeState", "incative"),
             location.reload());
@@ -39,6 +38,11 @@ class Command {
                 ? this.changeAbcs()
                 : console.log("plese choose any game to play"));
     }
+
+    navbarToggle = () => {
+        $(".navbar").toggle();
+    };
+
     randomNmmbr = (max, min) => {
         return Math.floor(Math.random() * (max - min + 1) + min);
     };

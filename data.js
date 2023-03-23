@@ -29,7 +29,7 @@ const contextData = {
     ],
     keyCommands: {
         r: "reset",
-        h: "reset",
+        h: "help",
         n: "numbers",
         a: "abcs",
         " ": "exec",
