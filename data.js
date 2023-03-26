@@ -27,12 +27,4 @@ const contextData = {
         "YAK",
         "ZEBRA",
     ],
-    keyCommands: {
-        r: "reset",
-        h: "help",
-        n: "numbers",
-        a: "abcs",
-        " ": "exec",
-        Enter: "exec",
-    },
 };

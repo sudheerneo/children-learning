@@ -3,13 +3,13 @@ $(document).ready(() => {
     $(document).keyup((e) => {
         new Command().changeColors(); //change colors when press any key
         const pressedKey = e.key.toLowerCase();
-        const command = contextData.keyCommands[pressedKey];
-        command ? new Command(command) : console.log("key not assigned ");
+        pressedKey ? new Command(pressedKey) : console.log("key not assigned ");
     });
     checkCompatibility();
 });
 
 const checkCompatibility = () => {
+    new Command().changeColors();
     window.innerHeight < window.innerWidth
         ? false
         : ($("#display").html(
@@ -25,13 +25,13 @@ class Command {
     constructor(req) {
         const activeState = window.localStorage.getItem("activeState");
 
-        req === "numbers" && this.numbers();
-        req === "abcs" && this.abcs();
-        req === "help" && this.navbarToggle();
-        req === "reset" &&
+        req === "n" && this.numbers();
+        req === "a" && this.abcs();
+        req === "h" && this.navbarToggle();
+        req === "r" &&
             (window.localStorage.setItem("activeState", "incative"),
             location.reload());
-        req === "exec" &&
+        req === " " &&
             (activeState === "numBlock"
                 ? this.guesNumbrsGame()
                 : activeState === "abcBlock"
@@ -96,6 +96,17 @@ class Command {
                             html += `<div class="numbrsList m-1 p-3 text-center" style="background: ${this.randomColor()}; color: ${this.randomColor()}">${String.fromCharCode(
                                 i
                             )} </div>`;
+                        }
+                        return html;
+                    })()}
+                </div>
+                <div class="d-flex flex-wrap mt-5" id="num">
+                    ${(() => {
+                        let html = "";
+                        for (let i = 65; i <= 90; i++) {
+                            html += `<div class="numbrsList m-1 p-3 text-center" style="background: ${this.randomColor()}; color: ${this.randomColor()}">${String.fromCharCode(
+                                i
+                            ).toLowerCase()} </div>`;
                         }
                         return html;
                     })()}
