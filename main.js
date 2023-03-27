@@ -1,7 +1,6 @@
 $(document).ready(() => {
     window.localStorage.setItem("activeState", "incative"); //reset state
     $(document).keyup((e) => {
-        new Command().changeColors(); //change colors when press any key
         const pressedKey = e.key.toLowerCase();
         pressedKey ? new Command(pressedKey) : console.log("key not assigned ");
     });
@@ -23,6 +22,7 @@ const checkCompatibility = () => {
 
 class Command {
     constructor(req) {
+        this.changeColors(); //change colors whhen key pressed
         const activeState = window.localStorage.getItem("activeState");
 
         req === "n" && this.numbers();
