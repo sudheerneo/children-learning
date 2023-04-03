@@ -1,11 +1,25 @@
 $(document).ready(() => {
     window.localStorage.setItem("activeState", "incative"); //reset state
     $(document).keyup((e) => {
+        goFullscreen();
         const pressedKey = e.key.toLowerCase();
         pressedKey ? new Command(pressedKey) : console.log("key not assigned ");
     });
     checkCompatibility();
 });
+
+const goFullscreen = () => {
+    const body = document.documentElement;
+    body.requestFullScreen
+        ? body.requestFullscreen()
+        : body.webkitRequestFullscreen
+        ? body.webkitRequestFullscreen()
+        : body.msRequestFullscreen
+        ? body.msRequestFullscreen()
+        : body.mozRequestFullscreen
+        ? body.mozRequestFullscreen()
+        : 0;
+};
 
 const checkCompatibility = () => {
     new Command().changeColors();
