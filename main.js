@@ -41,7 +41,9 @@ class Command {
 
         req === "n" && this.numbers();
         req === "a" && this.abcs();
-        req === "h" && this.navbarToggle();
+        req === "t" && this.aaa();
+        req === "h" && this.haaa();
+        req === "f" && this.footerToggle();
         req === "r" &&
             (window.localStorage.setItem("activeState", "incative"),
             location.reload());
@@ -50,10 +52,14 @@ class Command {
                 ? this.guesNumbrsGame()
                 : activeState === "abcBlock"
                 ? this.changeAbcs()
-                : console.log("plese choose any game to play"));
+                : activeState === "aaaBlock"
+                ? this.changeAaa()
+                : activeState === "haaaBlock"
+                ? this.changeHaaa()
+                : 0);
     }
 
-    navbarToggle = () => {
+    footerToggle = () => {
         $(".navbar").toggle();
     };
 
@@ -71,7 +77,7 @@ class Command {
     guesNumbrsGame = () => {
         $("#display").html(`
             <div class="contaniner numberGame">
-                ${this.randomNmmbr(100, 1)}
+                ${this.randomNmmbr(200, 100)}
             </div>
         `);
     };
@@ -137,6 +143,133 @@ class Command {
         `);
     };
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    aaa = () => {
+        window.localStorage.setItem("activeState", "aaaBlock");
+        const telLetters = contextData.telLetters;
+        // const brTagsNeeded = ["అః", "ఙ", "ఞ", "ణ", "న", "మ"];
+
+        // write in line
+        const drawline = (telLetters, condition, randomColor) => {
+            console.log("line draw");
+            return `
+                    <div class="d-flex flex-wrap mt-1" id="num">
+                        ${telLetters
+                            .map((letter, index) => {
+                                let item = condition(index)
+                                    ? `<div class="numbrsList m-1 p-3 text-center" style="background: ${randomColor()}; color: ${randomColor()}">${letter}</div>`
+                                    : "";
+
+                                return item;
+                            })
+                            .join("")}
+                    </div>
+            `;
+        };
+        $("#display").html(`
+            <div class="  d-flex flex-wrap justify-content-center">
+            ${drawline(telLetters, (index) => index <= 15, this.randomColor)} 
+             ${drawline(
+                 telLetters,
+                 (index) => index >= 16 && index <= 20,
+                 this.randomColor
+             )} 
+              ${drawline(
+                  telLetters,
+                  (index) => index >= 21 && index <= 25,
+                  this.randomColor
+              )}
+              ${drawline(
+                  telLetters,
+                  (index) => index >= 26 && index <= 30,
+                  this.randomColor
+              )} 
+              ${drawline(
+                  telLetters,
+                  (index) => index >= 31 && index <= 35,
+                  this.randomColor
+              )}
+              ${drawline(telLetters, (index) => index >= 36, this.randomColor)}
+
+             </div>
+       
+        `);
+    };
+    changeAaa = () => {
+        const words = contextData.telLetters;
+        $("#display").html(`
+            <div class="contaniner numberGame">
+                ${words[this.randomNmmbr(51, 0)]}
+            </div>
+        `);
+    };
+    haaa = () => {
+        window.localStorage.setItem("activeState", "haaaBlock");
+        const telLetters = contextData.hinLetters;
+        // const brTagsNeeded = ["అః", "ఙ", "ఞ", "ణ", "న", "మ"];
+
+        // write in line
+        const drawline = (telLetters, condition, randomColor) => {
+            console.log("line draw");
+            return `
+                    <div class="d-flex flex-wrap mt-1" id="num">
+                        ${telLetters
+                            .map((letter, index) => {
+                                let item = condition(index)
+                                    ? `<div class="numbrsList m-1 p-3 text-center" style="background: ${randomColor()}; color: ${randomColor()}">${letter}</div>`
+                                    : "";
+
+                                return item;
+                            })
+                            .join("")}
+                    </div>
+            `;
+        };
+        $("#display").html(`
+            <div class="  d-flex flex-wrap justify-content-center">
+            ${drawline(telLetters, (index) => index <= 11, this.randomColor)} 
+             ${drawline(
+                 telLetters,
+                 (index) => index >= 12 && index <= 16,
+                 this.randomColor
+             )} 
+              ${drawline(
+                  telLetters,
+                  (index) => index >= 17 && index <= 21,
+                  this.randomColor
+              )}
+              ${drawline(
+                  telLetters,
+                  (index) => index >= 22 && index <= 26,
+                  this.randomColor
+              )} 
+              ${drawline(
+                  telLetters,
+                  (index) => index >= 27 && index <= 31,
+                  this.randomColor
+              )}
+              ${drawline(
+                  telLetters,
+                  (index) => index >= 32 && index <= 36,
+                  this.randomColor
+              )}
+              ${drawline(telLetters, (index) => index >= 37, this.randomColor)}
+
+             </div>
+       
+        `);
+    };
+    changeHaaa = () => {
+        const words = contextData.hinLetters;
+        $("#display").html(`
+            <div class="contaniner numberGame">
+                ${words[this.randomNmmbr(51, 0)]}
+            </div>
+        `);
+    };
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////
     changeColors = () => {
         document.body.style.backgroundColor = this.randomColor();
         document.body.style.color = this.randomColor();
@@ -148,7 +281,11 @@ class Command {
             background: this.randomColor(),
             color: this.randomColor(),
         });
-        $(".numberDiv").css({
+        $(".aaaDiv").css({
+            background: this.randomColor(),
+            color: this.randomColor(),
+        });
+        $(".haaaDiv").css({
             background: this.randomColor(),
             color: this.randomColor(),
         });

@@ -20,4 +20,11 @@
     text-align: center;
     box-shadow: 1px 1px lightslategray;
     align-items: center;
+    min-width: 100px; /* Adjust the minimum width as needed */
+}
+/* Pseudo-element for line break effect */
+.line-break::before {
+    content: "";
+    flex-basis: 100%;
+    height: 0;
 }
