@@ -41,8 +41,8 @@ class Command {
 
         req === "n" && this.numbers();
         req === "a" && this.abcs();
-        req === "t" && this.aaa();
-        req === "h" && this.haaa();
+        req === "t" && this.teluguLetters();
+        req === "h" && this.hindiLetters();
         req === "f" && this.footerToggle();
         req === "r" &&
             (window.localStorage.setItem("activeState", "incative"),
@@ -52,10 +52,10 @@ class Command {
                 ? this.guesNumbrsGame()
                 : activeState === "abcBlock"
                 ? this.changeAbcs()
-                : activeState === "aaaBlock"
-                ? this.changeAaa()
-                : activeState === "haaaBlock"
-                ? this.changeHaaa()
+                : activeState === "teluguLettersBlock"
+                ? this.changeTeluguLetters()
+                : activeState === "hindiLettersBlock"
+                ? this.changeHindiLetters()
                 : 0);
     }
 
@@ -143,16 +143,13 @@ class Command {
         `);
     };
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    aaa = () => {
-        window.localStorage.setItem("activeState", "aaaBlock");
+    teluguLetters = () => {
+        window.localStorage.setItem("activeState", "teluguLettersBlock");
         const telLetters = contextData.telLetters;
         // const brTagsNeeded = ["అః", "ఙ", "ఞ", "ణ", "న", "మ"];
 
         // write in line
         const drawline = (telLetters, condition, randomColor) => {
-            console.log("line draw");
             return `
                     <div class="d-flex flex-wrap mt-1" id="num">
                         ${telLetters
@@ -196,7 +193,7 @@ class Command {
        
         `);
     };
-    changeAaa = () => {
+    changeTeluguLetters = () => {
         const words = contextData.telLetters;
         $("#display").html(`
             <div class="contaniner numberGame">
@@ -204,14 +201,14 @@ class Command {
             </div>
         `);
     };
-    haaa = () => {
-        window.localStorage.setItem("activeState", "haaaBlock");
+
+    hindiLetters = () => {
+        window.localStorage.setItem("activeState", "hindiLettersBlock");
         const telLetters = contextData.hinLetters;
         // const brTagsNeeded = ["అః", "ఙ", "ఞ", "ణ", "న", "మ"];
 
         // write in line
         const drawline = (telLetters, condition, randomColor) => {
-            console.log("line draw");
             return `
                     <div class="d-flex flex-wrap mt-1" id="num">
                         ${telLetters
@@ -260,16 +257,16 @@ class Command {
        
         `);
     };
-    changeHaaa = () => {
+
+    changeHindiLetters = () => {
         const words = contextData.hinLetters;
         $("#display").html(`
             <div class="contaniner numberGame">
-                ${words[this.randomNmmbr(51, 0)]}
+                ${words[this.randomNmmbr(47, 0)]}
             </div>
         `);
     };
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
     changeColors = () => {
         document.body.style.backgroundColor = this.randomColor();
         document.body.style.color = this.randomColor();
