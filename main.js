@@ -77,7 +77,7 @@ class Command {
     guesNumbrsGame = () => {
         $("#display").html(`
             <div class="contaniner numberGame">
-                ${this.randomNmmbr(200, 100)}
+                ${this.randomNmmbr(999, 1)}
             </div>
         `);
     };
